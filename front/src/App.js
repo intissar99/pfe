@@ -4,6 +4,7 @@ import Home from "./components/Home"
 import ContactUs from "./components/ContactUs"
 import Navbar from "./components/Navbar"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import './App.css'
 function App() {
   return (
     <div>
