@@ -1,35 +1,29 @@
 import React from 'react'
-import {Carousel} from 'react-bootstrap' ;
-//mport banner1 from '../../image'
-//import banner2 from '../../image'
-//import banner3 from '../../image'
+import Featurebox from './Featurebox'
+import featureimage from '../images/feature_1.png'
+import featureimage2 from '../images/feature_2.png'
+import featureimage3 from '../images/feature_3.png'
+//import './app.css'
+
 
 function Home() {
   return (
-    <div > 
-    <Carousel variant="dark">
-      <Carousel.Item>
-        <img className="d-block w-100 "src="../../image/banner1.png"alt="banner1"/>
-        <Carousel.Caption>
-          <h3>detail</h3>
-        </Carousel.Caption>
-        
-      </Carousel.Item>
-      <Carousel.Item>
-        <img className="d-block w-100 " src="../../image/banner2.png" alt="banner2"/>
-        <Carousel.Caption>
-          <h3>detail2</h3>
-        </Carousel.Caption>
-        <Carousel.Item>
-        <img className="d-block w-100 " src="../../image/banner1.png" alt="banner3"/>
-        <Carousel.Caption>
-          <h3>detail3</h3>
-        </Carousel.Caption>
-        
-      </Carousel.Item>
-        
-      </Carousel.Item>
-    </Carousel>
+    <div className='column'>
+      <div id="main">
+    <div className='name' >
+        <h1> <span> Welcome to the portal of</span>  GPRO   Consulting</h1>
+        <p className='details'> Lorem ipsum dolor sit amet...</p>
+        </div>
+    </div>
+    <div id='features'>
+        <div className='a-container'>
+            <Featurebox image={featureimage} title='Lorem ipsum dolor sit amet'/>
+            <Featurebox image={featureimage2} title='Lorem ipsum dolor sit amet'/>
+            <Featurebox image={featureimage3} title='Lorem ipsum dolor sit amet'/>
+        </div>
+    </div>
+    
+    
     </div>
   )
 }
