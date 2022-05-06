@@ -1,4 +1,5 @@
-import {React ,useState}from "react";
+import {React ,useState,useContext}from "react";
+import Context from "../context/Context"
 
 import axios from "axios";
 import {
@@ -31,11 +32,10 @@ function Login() {
     };
     const avatarStyle = { backgroundColor: "#1bbd7e" };
     const btnstyle = { margin: "8px 0" };
-  
-    
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
   
+    const {dispatch,isFetching}=useContext(Context)
    
     function usernamechanged(event) {
       setusername(event.target.value);
@@ -47,15 +47,18 @@ function Login() {
   
     function onSubmit(event) {
       event.preventDefault();
+      dispatch({type:"LoginStart"})
       axios.post("http://localhost:3000/app/login", {
 
           username: username,
           password: password,
         })
-        .then(() => {
+        .then((res) => {
+          dispatch({type:"LoginSuccess",payload:res.data})
           alert("user added");
         })
         .catch(() => {
+          dispatch({type:"LoginFailure"})
           alert("try again");
         });
     }
@@ -95,6 +98,7 @@ function Login() {
             variant="contained"
             style={btnstyle}
             fullWidth
+            disabled={isFetching}
             onClick={onSubmit}
           >
             login
