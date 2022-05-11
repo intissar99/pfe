@@ -5,9 +5,9 @@ const initialState = {
   isFetching: false,
   error: false,
 };
-const Context = createContext(initialState);
+export const Context = createContext(initialState);
 
-function ContextProvider({ children }) {
+ export function ContextProvider({ children }) {
   const [state, dispatch] = useReducer(Reducers, initialState);
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(state.user));
@@ -28,4 +28,4 @@ function ContextProvider({ children }) {
   );
 }
 
-export default ContextProvider;
+

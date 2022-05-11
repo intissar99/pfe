@@ -5,14 +5,15 @@ import Contactus from "./components/Contactus"
 import Services from "./components/Services"
 import Profile from "./components/Profile"
 import Navbar from "./components/Navbar"
-
+import {ContextProvider} from "./context/Context"
 
 
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
+
 function App() {
   return (
-    <div >
+    <ContextProvider >
       <BrowserRouter>
      <Navbar/>
 
@@ -29,7 +30,7 @@ function App() {
 
       </BrowserRouter>
 
-    </div>
+    </ContextProvider >
   );
 }
 

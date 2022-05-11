@@ -1,4 +1,4 @@
-import React from "react";
+import{React,useContext}  from "react";
 import {
   Grid,
   TextField,
@@ -9,8 +9,11 @@ import {
   type,
 } from "@material-ui/core";
 import Stack from "@mui/material/Stack";
+import {Context} from "../context/Context"
 
 function Profile() {
+  const {user} = useContext(Context)
+  console.log(user[0])
   return (
     <div>
       <Grid>
@@ -27,37 +30,37 @@ function Profile() {
             />
             <Stack direction="row" spacing={50}>
               <Typography
-                variant="body2"
+                
                 color="textSecondary"
                 component="p"
                 gutterBottom
                 variant="h3"
               >
-                name
+                {user[0].fullname}
               </Typography>
               <input type="text" placeholder="name" />
             </Stack>
             <Stack direction="row" spacing={38}>
               <Typography
-                variant="body2"
+               
                 color="textSecondary"
                 component="p"
                 gutterBottom
                 variant="h3"
               >
-                username
+                {user[0].username}
               </Typography>
               <input type="text" placeholder="username" />
             </Stack>
             <Stack direction="row" spacing={50}>
               <Typography
-                variant="body2"
+                
                 color="textSecondary"
                 component="p"
                 gutterBottom
                 variant="h3"
               >
-                email
+                {user[0].email}
               </Typography>
 
               <input type="text" placeholder="email" />
