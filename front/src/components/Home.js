@@ -1,25 +1,29 @@
-import { Slide } from "react-slideshow-image";
-import slideImages from "../../src/data";
-import "react-slideshow-image/dist/styles.css";
+import React from 'react'
+import Featurebox from './Featurebox'
+import featureimage from '../images/feature_1.png'
+import featureimage2 from '../images/feature_2.png'
+import featureimage3 from '../images/feature_3.png'
+//import './app.css'
 
-//mport banner1 from '../../image'
-//import banner2 from '../../image'
-//import banner3 from '../../image'
 
 const Home = () => {
   return (
-    <div className="container">
-      <Slide easing="ease">
-        {slideImages.map((slide, index) => {
-          return (
-            <div className="slide" key={slide}>
-              <div style={{ backgroundImage: `url(${slideImages[index]})` }}>
-                <span>Slide {index + 1}</span>
-              </div>
-            </div>
-          );
-        })}
-      </Slide>
+    <div className='column'>
+      <div id="main">
+        <div className='name' >
+          <h1> <span> Welcome to the portal of</span>  GPRO   Consulting</h1>
+          <p className='details'> Lorem ipsum dolor sit amet...</p>
+        </div>
+      </div>
+      <div id='features'>
+        <div className='a-container'>
+          <Featurebox image={featureimage} title='Lorem ipsum dolor sit amet' />
+          <Featurebox image={featureimage2} title='Lorem ipsum dolor sit amet' />
+          <Featurebox image={featureimage3} title='Lorem ipsum dolor sit amet' />
+        </div>
+      </div>
+
+
     </div>
   )
 }

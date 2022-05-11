@@ -1,4 +1,6 @@
-import {React ,useState}from "react";
+import {React ,useState,useContext}from "react";
+import {Context} from "../context/Context"
+import {useNavigate} from "react-router-dom"
 
 import axios from "axios";
 import {
@@ -22,6 +24,7 @@ import {
   }));
 
 function Login() {
+  const navigate = useNavigate()
     const style = useStyles();
     const paperStyle = {
       padding: 20,
@@ -31,11 +34,11 @@ function Login() {
     };
     const avatarStyle = { backgroundColor: "#1bbd7e" };
     const btnstyle = { margin: "8px 0" };
-  
-    
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
   
+   
+    const {isFetching,dispatch}=useContext(Context)
    
     function usernamechanged(event) {
       setusername(event.target.value);
@@ -44,20 +47,25 @@ function Login() {
     function passwordchanged(event) {
       setpassword(event.target.value);
     }
-  
-    function onSubmit(event) {
+  function dispatchLs(){
+    dispatch({type:"LoginStart"})
+  }
+     const  onSubmit=async(event)=> {
+
       event.preventDefault();
-      axios.post("http://localhost:3000/app/login", {
+      dispatchLs()
+      try{
+        const res= await axios.post("http://localhost:3000/login", {
 
           username: username,
           password: password,
         })
-        .then(() => {
-          alert("user added");
-        })
-        .catch(() => {
+        dispatch({type:"LoginSuccess",payload:res.data})
+        navigate("/profile")
+      }catch(err) {
+          dispatch({type:"LoginFailure"})
           alert("try again");
-        });
+        };
     }
   return (
       <div className={style.root}>
@@ -67,7 +75,7 @@ function Login() {
             <Avatar style={avatarStyle}>
               <LockOutlinedIcon />
             </Avatar>
-            <h2>Sign Up </h2>
+            <h2>Login </h2>
           </Grid>
           
           <TextField
@@ -95,6 +103,7 @@ function Login() {
             variant="contained"
             style={btnstyle}
             fullWidth
+            disabled={isFetching}
             onClick={onSubmit}
           >
             login
