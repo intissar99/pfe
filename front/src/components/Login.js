@@ -53,19 +53,23 @@ function Login() {
      const  onSubmit=async(event)=> {
 
       event.preventDefault();
-      dispatchLs()
+      
       try{
-        const res= await axios.post("http://localhost:3000/login", {
+        const res= await axios.post("http://localhost:3000/user/login", {
 
           username: username,
           password: password,
         })
         dispatch({type:"LoginSuccess",payload:res.data})
-        navigate("/profile")
+        console.log(Object.values(res.data) )        
+        if (res) navigate("/profile")
+        
       }catch(err) {
           dispatch({type:"LoginFailure"})
           alert("try again");
         };
+
+        
     }
   return (
       <div className={style.root}>

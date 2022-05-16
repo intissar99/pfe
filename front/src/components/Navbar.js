@@ -18,6 +18,7 @@ function Navbar() {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const [nav, setnav] = useState(false);
+  const [longeur,setLongeur]= useState(0); 
 
   const handleLogOut = () => {
     dispatch({ type: "LogOut" });
@@ -42,6 +43,8 @@ function Navbar() {
     }
   };
   window.addEventListener("scroll", changeBackground);
+  setLongeur(Object.values(user[0]).length )
+  console.log (longeur) 
   return (
     <nav className={nav ? "nav active" : "nav"}>
       <a href="#" className="logo">
@@ -50,8 +53,10 @@ function Navbar() {
         </Link>
       </a>
 
-      <ul>
-        <li>
+      
+        {longeur === 6 ? null : 
+         <ul> 
+           <li>
           <Link to={"/Contactus"}>Contact us </Link>
         </li>
         <li>
@@ -63,8 +68,9 @@ function Navbar() {
           <a>
             <Link to={"/Products"}>Products </Link>
           </a>
-        </li>
-
+        </li> </ul>}
+        
+        <ul>
         {user ? (
           <li>
             <Tooltip title="Open settings" sx={{ p: 0 }} margin="right">

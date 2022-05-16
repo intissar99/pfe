@@ -3,12 +3,13 @@ mongoose.Promise= global.Promise
 const adminSchema= new mongoose.Schema(
     {
        username: String ,
-       password : String 
+       password : String,
+       verif: String 
     },
     { 
         timestamps:true 
 
     }
 )
-const admin=mongoose.model("admin",adminSchema)
+const admin=mongoose.model("admins",adminSchema)
  module.exports= admin

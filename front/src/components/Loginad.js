@@ -1,47 +1,53 @@
-import React from "react";
-import { React, useState, useContext } from "react";
-import { Context } from "../context/Context";
+import {React ,useState,useContext}from "react";
+import {Context} from "../context/Context"
+import {useNavigate} from "react-router-dom"
+
+import axios from "axios";
 import {
-  Grid,
-  Paper,
-  Avatar,
-  TextField,
-  Button,
-  Typography,
-} from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { makeStyles } from "@material-ui/core/styles";
+    Grid,
+    Paper,
+    Avatar,
+    TextField,
+    Button,
+    Typography,
+  } from "@material-ui/core";
+  import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+  import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-  },
-}));
-function adminLogin() {
+  
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100vh",
+    },
+  }));
 
-const style = useStyles();
-const paperStyle = {
-    padding: 20,
-    height: "70vh",
-    width: 280,
-    margin: "20px auto",
-  };
-  const [username, setusername] = useState("");
-  const [password, setpassword] = useState("");
-
- 
-
-
-  function usernamechanged(event) {
-    setusername(event.target.value);
-  }
-
-  function passwordchanged(event) {
-    setpassword(event.target.value);
-  }
+function Loginad() {
+  const navigate = useNavigate()
+    const style = useStyles();
+    const paperStyle = {
+      padding: 20,
+      height: "70vh",
+      width: 280,
+      margin: "20px auto",
+    };
+    const avatarStyle = { backgroundColor: "#1bbd7e" };
+    const btnstyle = { margin: "8px 0" };
+    const [username, setusername] = useState("");
+    const [password, setpassword] = useState("");
+  
+   
+    const {isFetching,dispatch}=useContext(Context)
+   
+    function usernamechanged(event) {
+      setusername(event.target.value);
+    }
+  
+    function passwordchanged(event) {
+      setpassword(event.target.value);
+    }
   function dispatchLs(){
     dispatch({type:"LoginStart"})
   }
@@ -50,19 +56,22 @@ const paperStyle = {
       event.preventDefault();
       dispatchLs()
       try{
-        const res= await axios.post("http://localhost:3000/app/login", {
+        const res= await axios.post("http://localhost:3000/login", {
 
           username: username,
           password: password,
         })
         dispatch({type:"LoginSuccess",payload:res.data})
+        console.log(Object.values(res.data) )     
         navigate("/Dashboard")
       }catch(err) {
           dispatch({type:"LoginFailure"})
           alert("try again");
         };
+    }
+    
   return (
-    <div className={style.root}>
+      <div className={style.root}>
       <Grid>
         <Paper elevation={10} style={paperStyle}>
           <Grid align="center">
@@ -71,7 +80,7 @@ const paperStyle = {
             </Avatar>
             <h2>Login </h2>
           </Grid>
-
+          
           <TextField
             label="Username"
             placeholder="Enter username"
@@ -79,7 +88,7 @@ const paperStyle = {
             fullWidth
             required
           />
-
+         
           <TextField
             label="Password"
             placeholder="Enter password"
@@ -102,10 +111,10 @@ const paperStyle = {
           >
             login
           </Button>
+         
         </Paper>
       </Grid>
-    </div>
-  );
-}
+  </div>
+  )}
 
-export default adminLogin;
+export default Loginad;

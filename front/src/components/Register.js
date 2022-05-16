@@ -58,7 +58,7 @@ function Register() {
 
   function onSubmit(event) {
     event.preventDefault();
-    axios.post("http://localhost:3000/app/register", {
+    axios.post("http://localhost:3000/user/register", {
         fullname: fullname,
         username: username,
         email: email,
