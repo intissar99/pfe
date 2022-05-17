@@ -81,7 +81,7 @@ export default function Sidebar() {
               <Timeline className="sidebarIcon" />
               Analytics
             </li>
-        
+
           </ul>
         </div>
       </div>

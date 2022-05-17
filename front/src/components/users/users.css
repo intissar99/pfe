@@ -1,0 +1,6 @@
+.showPanel {
+  height: calc(100vh - 50px);
+  width: 50%;
+  background-color: #000;
+  margin: 50px;
+}

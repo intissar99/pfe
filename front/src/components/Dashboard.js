@@ -1,14 +1,12 @@
 
 import Sidebar from "./sidebar/Sidebar"
-import {React, useContext}from "react";
-import {Context} from "../context/Context"
-
+import Users from "./users/Users"
 function Dashboard() {
-  const {user} = useContext(Context)
-  console.log(user)
+
   return (
     <div>
-      <Sidebar/>
+      <Sidebar />
+
     </div>
   )
 }

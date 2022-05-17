@@ -14,16 +14,14 @@ const settings = ["Profile", "Logout"];
 
 function Navbar() {
   const navigate = useNavigate();
-  const { user, dispatch } = useContext(Context);
+  const { admin, user, dispatch } = useContext(Context);
   const [anchorElUser, setAnchorElUser] = useState(null);
-
   const [nav, setnav] = useState(false);
-  const [longeur,setLongeur]= useState(0); 
 
   const handleLogOut = () => {
-    dispatch({ type: "LogOut" });
-    localStorage.removeItem("user");
-    navigate("/Login");
+    dispatch({ type: "LogOutAdmin" });
+    localStorage.removeItem("admin");
+    navigate("/LoginAd");
     document.location.reload()
   };
 
@@ -34,7 +32,6 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
   const changeBackground = () => {
     if (window.scrollY >= 50) {
       setnav(true);
@@ -43,8 +40,6 @@ function Navbar() {
     }
   };
   window.addEventListener("scroll", changeBackground);
-  setLongeur(Object.values(user[0]).length )
-  console.log (longeur) 
   return (
     <nav className={nav ? "nav active" : "nav"}>
       <a href="#" className="logo">
@@ -53,10 +48,10 @@ function Navbar() {
         </Link>
       </a>
 
-      
-        {longeur === 6 ? null : 
-         <ul> 
-           <li>
+
+
+      {admin ? null : <ul>
+        <li>
           <Link to={"/Contactus"}>Contact us </Link>
         </li>
         <li>
@@ -68,10 +63,11 @@ function Navbar() {
           <a>
             <Link to={"/Products"}>Products </Link>
           </a>
-        </li> </ul>}
-        
-        <ul>
-        {user ? (
+        </li>
+      </ul>}
+
+      <ul>
+        {user || admin ? (
           <li>
             <Tooltip title="Open settings" sx={{ p: 0 }} margin="right">
               <IconButton onClick={handleOpenUserMenu}>
@@ -106,7 +102,7 @@ function Navbar() {
           </li>
         ) : (
           <li>
-           
+
             <Link to="/login">
               <button>login</button>
             </Link>
